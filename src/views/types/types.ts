@@ -1,5 +1,4 @@
 export type Entry = {
-    id: string;
     name: string;
     thumbnail: string;
     created: number;
@@ -16,7 +15,17 @@ export type ParsedResponse = {
         dist: number;
         modhash: string;
         geo_filter: string | null;
-        children: Array<Record<string, string>>
+        children: Array<Record<string, any>>
         before: string | null;
     }
+}
+
+export type BorderEntries = {
+    firstEntryName: string;
+    lastEntryName: string;
+}
+
+export type LimitParams = {
+    after: string;
+    before: string;
 }

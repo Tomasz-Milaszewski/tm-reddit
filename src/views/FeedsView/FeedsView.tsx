@@ -3,27 +3,30 @@ import { FeedsViewNavigation } from './components/FeedsViewNavigation';
 import { FeedsViewHeader } from './components/FeedsViewHeader';
 import { FeedsViewStyledPageWrapper } from './styled/FeedsViewStyledPageWrapper';
 import { FeedsViewStyledEntriesWrapper } from './styled/FeedsViewStyledEntriesWrapper';
-import { filterEntriesData } from '../utils/filterEntriesData';
-import { Entry } from '../types/types';
-import { REDDIT_POLAND_JSON_URL } from '../constants/constants';
+import { filterEntriesData, getBorderEntries } from '../utils/utils';
+import { Entry, BorderEntries, LimitParams } from '../types/types';
+import { REDDIT_POLAND_JSON_URL, TARGET_KEYS } from '../constants/constants';
 
 export const FeedsView: React.FC = () => {
     const [isFetched, setIsFetched] = useState<boolean>(false);
     const [entries, setEntries] = useState<Entry[]>([]);
     const [page, setPage] = useState<number>(1);
     const [limit, setLimit] = useState<number>(10);
+    const [borderEntries, setBorderEntries] = useState<BorderEntries>({firstEntryName: '', lastEntryName: ''});
+    const [limitParams, setLimitParams] = useState<LimitParams>({after: '', before: ''});
 
     useEffect(() => {
         disableButtons();
-        fetch(`${REDDIT_POLAND_JSON_URL}?limit=${limit}`)
+        fetch(`${REDDIT_POLAND_JSON_URL}?limit=${limit}&after=${limitParams.after}&before=${limitParams.before}`)
             .then(res => res.json())
             .then(
                 (result) => {
-                    const filteredEntries = filterEntriesData(result);
-                    console.log(filterEntriesData(result));
+                    const filteredEntries = filterEntriesData(result, TARGET_KEYS);
+                    console.log(filterEntriesData(result, TARGET_KEYS));
                     setIsFetched(true);
                     enableButtons();
                     setEntries(filteredEntries);
+                    setBorderEntries(getBorderEntries(filteredEntries))
                 }
                 // (error) => {handle error}
             )
@@ -31,8 +34,10 @@ export const FeedsView: React.FC = () => {
 
     const renderEntries = (pageEntries: Entry[]) => {
         return pageEntries.map((entry) =>(
-            <div key={entry.id}>
-                <p>{entry.name}</p>
+            <div key={entry.name}>
+                <span>{entry.name}</span>
+                <span> - - - </span>
+                <span>{entry.author}</span>
             </div>
         ));
     }
@@ -53,7 +58,12 @@ export const FeedsView: React.FC = () => {
             <FeedsViewStyledEntriesWrapper>
                 {renderEntries(entries)}
             </FeedsViewStyledEntriesWrapper>
-            <FeedsViewNavigation setPage={setPage} page={page} />
+            <FeedsViewNavigation
+                page={page}
+                setPage={setPage}
+                borderEntries={borderEntries}
+                setLimitParams={setLimitParams}
+            />
         </FeedsViewStyledPageWrapper>
     );
 };
