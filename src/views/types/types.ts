@@ -1,4 +1,5 @@
 export type Entry = {
+    id: string;
     name: string;
     thumbnail: string;
     created: number;

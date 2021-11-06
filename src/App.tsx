@@ -1,12 +1,10 @@
 import React from 'react';
-import {FeedsView} from './views/FeedsView/FeedsView';
+import { FeedsView } from './views/FeedsView/FeedsView';
 
 function App() {
-  return (
-    <div>
-      <FeedsView/>
-    </div>
-  );
+    return (
+        <FeedsView/>
+    );
 }
 
 export default App;

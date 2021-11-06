@@ -1,6 +1,10 @@
 import React, { useState, useEffect, useRef } from 'react';
+import { FeedsViewNavigation } from './components/FeedsViewNavigation';
+import { FeedsViewHeader } from './components/FeedsViewHeader';
+import { FeedsViewStyledPageWrapper } from './styled/FeedsViewStyledPageWrapper';
+import { FeedsViewStyledEntriesWrapper } from './styled/FeedsViewStyledEntriesWrapper';
 import { filterEntriesData } from '../utils/filterEntriesData';
-import {Entry} from '../types/types';
+import { Entry } from '../types/types';
 import { REDDIT_POLAND_JSON_URL } from '../constants/constants';
 
 export const FeedsView: React.FC = () => {
@@ -26,11 +30,11 @@ export const FeedsView: React.FC = () => {
                 }
                 // (error) => {handle error}
             )
-    }, [page])
+    }, [page, limit])
 
     const renderEntries = (pageEntries: Entry[]) => {
         return pageEntries.map((entry) =>(
-            <div>
+            <div key={entry.id}>
                 <p>{entry.name}</p>
             </div>
         ));
@@ -46,34 +50,13 @@ export const FeedsView: React.FC = () => {
         buttons.forEach((button) => button.disabled = true);
     }
 
-    const handleFirstClick = () => {
-        setPage(1);
-    }
-    const handlePrevClick = () => {
-        if (page === 1) {
-            return;
-        }
-        setPage(page - 1);
-    }
-    const handleNextClick = () => {
-        if (page === numberOfPages.current) {
-            return;
-        }
-        setPage(page + 1);
-    }
-    const handleLastClick = () => {
-        setPage(numberOfPages.current);
-    }
-
     return (
-        <div>
-            {renderEntries(entries)}
-            <section>
-                <button onClick={handleFirstClick}>first</button>
-                <button onClick={handlePrevClick}>previous</button>
-                <button onClick={handleNextClick}>next</button>
-                <button onClick={handleLastClick}>last</button>
-            </section>
-        </div>
+        <FeedsViewStyledPageWrapper>
+            <FeedsViewHeader/>
+            <FeedsViewStyledEntriesWrapper>
+                {renderEntries(entries)}
+            </FeedsViewStyledEntriesWrapper>
+            <FeedsViewNavigation/>
+        </FeedsViewStyledPageWrapper>
     );
 };
