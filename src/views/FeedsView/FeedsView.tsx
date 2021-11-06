@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
 import { FeedsViewNavigation } from './components/FeedsViewNavigation';
 import { FeedsViewHeader } from './components/FeedsViewHeader';
 import { FeedsViewStyledPageWrapper } from './styled/FeedsViewStyledPageWrapper';
@@ -12,7 +12,6 @@ export const FeedsView: React.FC = () => {
     const [entries, setEntries] = useState<Entry[]>([]);
     const [page, setPage] = useState<number>(1);
     const [limit, setLimit] = useState<number>(10);
-    const numberOfPages = useRef<number>(0);
 
     useEffect(() => {
         disableButtons();
@@ -20,13 +19,11 @@ export const FeedsView: React.FC = () => {
             .then(res => res.json())
             .then(
                 (result) => {
-                    console.log(result);
                     const filteredEntries = filterEntriesData(result);
                     console.log(filterEntriesData(result));
                     setIsFetched(true);
                     enableButtons();
                     setEntries(filteredEntries);
-                    numberOfPages.current = (Math.ceil(result.data.dist/limit));
                 }
                 // (error) => {handle error}
             )
@@ -52,11 +49,11 @@ export const FeedsView: React.FC = () => {
 
     return (
         <FeedsViewStyledPageWrapper>
-            <FeedsViewHeader/>
+            <FeedsViewHeader setLimit={setLimit} />
             <FeedsViewStyledEntriesWrapper>
                 {renderEntries(entries)}
             </FeedsViewStyledEntriesWrapper>
-            <FeedsViewNavigation/>
+            <FeedsViewNavigation setPage={setPage} page={page} />
         </FeedsViewStyledPageWrapper>
     );
 };

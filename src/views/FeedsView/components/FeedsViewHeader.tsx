@@ -1,12 +1,31 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { FeedsViewStyledHeaderWrapper } from '../styled/FeedsViewStyledHeaderWrapper';
 import { FeedsViewStyledHeaderPagination } from '../styled/FeedsViewStyledHeaderPagination';
+import { PaginationOption } from '../../constants/constants';
 
-export const FeedsViewHeader: React.FC = () => {
-    const [limit, setLimit] = useState<number>(10);
+type FeedsViewHeaderProps = {
+    setLimit: (limit: number) => void;
+}
 
-    const handleClick = () => {
-        setLimit(10);
+export const FeedsViewHeader = (props: FeedsViewHeaderProps) => {
+    const { setLimit } = props;
+
+    const handleClick = (e: React.SyntheticEvent) => {
+        setLimit(Number((e.target as HTMLButtonElement).value));
+    }
+
+    const renderButtons = (options: string[]) => {
+        return options.map((option) => {
+            return (
+                <button
+                    value={PaginationOption[option]}
+                    onClick={handleClick}
+                    key={option}
+                >
+                    {PaginationOption[option]}
+                </button>
+            )
+        });
     }
 
     return (
@@ -15,9 +34,7 @@ export const FeedsViewHeader: React.FC = () => {
             <FeedsViewStyledHeaderPagination>
                 <span>Show: </span>
                 <div>
-                    <button onClick={handleClick}> 5 </button>
-                    <button onClick={handleClick}> 10 </button>
-                    <button onClick={handleClick}> 25 </button>
+                    {renderButtons(Object.keys(PaginationOption))}
                 </div>
             </FeedsViewStyledHeaderPagination>
         </FeedsViewStyledHeaderWrapper>
