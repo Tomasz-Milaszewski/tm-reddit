@@ -7,6 +7,7 @@ export type FilteredEntry = {
     score: number;
     title: string;
     id: string;
+    selftext: string;
 }
 
 export type ParsedResponse = {

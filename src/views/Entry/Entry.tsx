@@ -32,6 +32,7 @@ export const Entry = () => {
             <EntryHeader entryTitle={entry.title} />
             <EntryStyledItem>
                 <span>{`Author: ${entry.author}`}</span>
+                <span>{`Selftext: ${entry.selftext}`}</span>
                 <span>{`Created: ${readableDate}`}</span>
                 <span>{`Comments: ${entry.num_comments}`}</span>
                 <span>{`Score: ${entry.score}`}</span>

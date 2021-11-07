@@ -5,7 +5,7 @@ import { FeedHeader } from './components/FeedHeader';
 import { FeedStyledPageWrapper } from './styled/FeedStyledPageWrapper';
 import { FeedStyledEntriesWrapper } from './styled/FeedStyledEntriesWrapper';
 import { FeedStyledEntry } from './styled/FeedStyledEntry';
-import { filterEntriesData, getBorderEntries } from '../utils/utils';
+import { filterEntriesData, getBorderEntries, getDateFromTimestamp } from '../utils/utils';
 import { FilteredEntry, BorderEntries, LimitParams } from '../types/types';
 import { REDDIT_POLAND_FEED_JSON_URL, TARGET_KEYS } from '../constants/constants';
 
@@ -38,9 +38,12 @@ export const Feed = () => {
     const renderEntries = (pageEntries: FilteredEntry[]) => {
         return pageEntries.map((entry) =>(
             <FeedStyledEntry key={entry.name} onClick={() => handleEntryClick(entry.id)}>
-                <span>{entry.name}</span>
-                <span> - - - </span>
-                <span>{entry.author}</span>
+                <span>{`Title: ${entry.title}`}</span>
+                <span>{`Author: ${entry.author}`}</span>
+                <span>{`Created: ${getDateFromTimestamp(entry.created)}`}</span>
+                <span>{`Comments: ${entry.num_comments}`}</span>
+                <span>{`Score: ${entry.score}`}</span>
+                <img src={entry.thumbnail} alt=""/>
             </FeedStyledEntry>
         ));
     }
