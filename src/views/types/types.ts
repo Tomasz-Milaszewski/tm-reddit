@@ -1,4 +1,4 @@
-export type Entry = {
+export type FilteredEntry = {
     name: string;
     thumbnail: string;
     created: number;
@@ -6,6 +6,7 @@ export type Entry = {
     author: string;
     score: number;
     title: string;
+    id: string;
 }
 
 export type ParsedResponse = {

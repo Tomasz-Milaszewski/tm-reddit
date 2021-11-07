@@ -1,5 +1,6 @@
-export const REDDIT_POLAND_JSON_URL = 'https://www.reddit.com/r/poland.json';
-export const TARGET_KEYS = ['name', 'thumbnail', 'created', 'num_comments', 'author', 'score', 'title'];
+export const REDDIT_POLAND_FEED_JSON_URL = 'https://www.reddit.com/r/poland.json';
+export const REDDIT_POLAND_ENTRY_JSON_URL = 'https://www.reddit.com/r/poland/comments/';
+export const TARGET_KEYS = ['name', 'thumbnail', 'created', 'num_comments', 'author', 'score', 'title', 'id'];
 
 export const PaginationOption: { [index: string]: number } = {
   Five: 5,
