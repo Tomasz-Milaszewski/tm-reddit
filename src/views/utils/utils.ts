@@ -20,3 +20,7 @@ export function getBorderEntries(filteredEntries: FilteredEntry[]): BorderEntrie
         lastEntryName: filteredEntries[filteredEntries.length - 1].name,
     }
 }
+
+export function getDateFromTimestamp(timestamp: number): string {
+    return new Date(timestamp * 1000).toLocaleString();
+}
