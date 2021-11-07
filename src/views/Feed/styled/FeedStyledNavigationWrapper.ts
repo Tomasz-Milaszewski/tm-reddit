@@ -5,4 +5,5 @@ export const FeedStyledNavigationWrapper = styled.div`
   justify-content: center;
   width: 80%;
   border: 1px solid orange;
+  min-height: 5vh;
 `;

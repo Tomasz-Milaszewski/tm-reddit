@@ -6,4 +6,6 @@ export const FeedStyledEntriesWrapper = styled.div`
   align-items: center;
   width: 80%;
   border: 1px solid blue;
+  max-height: 85vh;
+  overflow-y: auto;
 `;

@@ -7,4 +7,5 @@ export const FeedStyledHeaderWrapper = styled.div`
   align-items: center;
   width: 80%;
   border: 1px solid orange;
+  min-height: 5vh;
 `;
