@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export const FeedsViewStyledNavigationWrapper = styled.div`
+export const FeedStyledNavigationWrapper = styled.div`
   display: flex;
   justify-content: center;
   width: 80%;

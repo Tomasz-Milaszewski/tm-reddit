@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from 'react';
-import { FeedsViewNavigation } from './components/FeedsViewNavigation';
-import { FeedsViewHeader } from './components/FeedsViewHeader';
-import { FeedsViewStyledPageWrapper } from './styled/FeedsViewStyledPageWrapper';
-import { FeedsViewStyledEntriesWrapper } from './styled/FeedsViewStyledEntriesWrapper';
+import { FeedNavigation } from './components/FeedNavigation';
+import { FeedHeader } from './components/FeedHeader';
+import { FeedStyledPageWrapper } from './styled/FeedStyledPageWrapper';
+import { FeedStyledEntriesWrapper } from './styled/FeedStyledEntriesWrapper';
 import { filterEntriesData, getBorderEntries } from '../utils/utils';
 import { Entry, BorderEntries, LimitParams } from '../types/types';
 import { REDDIT_POLAND_JSON_URL, TARGET_KEYS } from '../constants/constants';
 
-export const FeedsView: React.FC = () => {
+export const Feed = () => {
     const [isFetched, setIsFetched] = useState<boolean>(false);
     const [entries, setEntries] = useState<Entry[]>([]);
     const [page, setPage] = useState<number>(1);
@@ -53,17 +53,17 @@ export const FeedsView: React.FC = () => {
     }
 
     return (
-        <FeedsViewStyledPageWrapper>
-            <FeedsViewHeader setLimit={setLimit} />
-            <FeedsViewStyledEntriesWrapper>
+        <FeedStyledPageWrapper>
+            <FeedHeader setLimit={setLimit} />
+            <FeedStyledEntriesWrapper>
                 {renderEntries(entries)}
-            </FeedsViewStyledEntriesWrapper>
-            <FeedsViewNavigation
+            </FeedStyledEntriesWrapper>
+            <FeedNavigation
                 page={page}
                 setPage={setPage}
                 borderEntries={borderEntries}
                 setLimitParams={setLimitParams}
             />
-        </FeedsViewStyledPageWrapper>
+        </FeedStyledPageWrapper>
     );
 };

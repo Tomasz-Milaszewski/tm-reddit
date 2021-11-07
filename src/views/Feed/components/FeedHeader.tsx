@@ -1,13 +1,13 @@
 import React from 'react';
-import { FeedsViewStyledHeaderWrapper } from '../styled/FeedsViewStyledHeaderWrapper';
-import { FeedsViewStyledHeaderPagination } from '../styled/FeedsViewStyledHeaderPagination';
+import { FeedStyledHeaderWrapper } from '../styled/FeedStyledHeaderWrapper';
+import { FeedStyledHeaderPagination } from '../styled/FeedStyledHeaderPagination';
 import { PaginationOption } from '../../constants/constants';
 
-type FeedsViewHeaderProps = {
+type FeedHeaderProps = {
     setLimit: (limit: number) => void;
 }
 
-export const FeedsViewHeader = (props: FeedsViewHeaderProps) => {
+export const FeedHeader = (props: FeedHeaderProps) => {
     const { setLimit } = props;
 
     const handleClick = (e: React.SyntheticEvent) => {
@@ -29,14 +29,14 @@ export const FeedsViewHeader = (props: FeedsViewHeaderProps) => {
     }
 
     return (
-        <FeedsViewStyledHeaderWrapper>
+        <FeedStyledHeaderWrapper>
             <span>Have a nice browsing ;-)</span>
-            <FeedsViewStyledHeaderPagination>
+            <FeedStyledHeaderPagination>
                 <span>Show: </span>
                 <div>
                     {renderButtons(Object.keys(PaginationOption))}
                 </div>
-            </FeedsViewStyledHeaderPagination>
-        </FeedsViewStyledHeaderWrapper>
+            </FeedStyledHeaderPagination>
+        </FeedStyledHeaderWrapper>
     );
 };

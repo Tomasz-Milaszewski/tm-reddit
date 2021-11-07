@@ -1,15 +1,15 @@
 import React from 'react';
-import { FeedsViewStyledNavigationWrapper } from '../styled/FeedsViewStyledNavigationWrapper';
+import { FeedStyledNavigationWrapper } from '../styled/FeedStyledNavigationWrapper';
 import { BorderEntries, LimitParams } from '../../types/types';
 
-type FeedsViewNavigationProps = {
+type FeedNavigationProps = {
     page: number;
     setPage: (page: number) => void;
     borderEntries: BorderEntries;
     setLimitParams: (limitParams: LimitParams) => void;
 }
 
-export const FeedsViewNavigation = (props: FeedsViewNavigationProps) => {
+export const FeedNavigation = (props: FeedNavigationProps) => {
     const { page, setPage, borderEntries, setLimitParams } = props;
 
     const handlePrevClick = () => {
@@ -31,9 +31,9 @@ export const FeedsViewNavigation = (props: FeedsViewNavigationProps) => {
     }
 
     return (
-        <FeedsViewStyledNavigationWrapper>
+        <FeedStyledNavigationWrapper>
             <button onClick={handlePrevClick}>previous</button>
             <button onClick={handleNextClick}>next</button>
-        </FeedsViewStyledNavigationWrapper>
+        </FeedStyledNavigationWrapper>
     );
 };

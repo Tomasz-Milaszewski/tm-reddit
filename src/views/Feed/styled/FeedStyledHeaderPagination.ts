@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export const FeedsViewStyledHeaderPagination = styled.div`
+export const FeedStyledHeaderPagination = styled.div`
   display: flex;
   align-items: flex-end;
 `;

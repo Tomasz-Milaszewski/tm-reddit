@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export const FeedsViewStyledHeaderWrapper = styled.div`
+export const FeedStyledHeaderWrapper = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
