@@ -36,7 +36,7 @@ export const Feed = () => {
             .catch((error) => {
                 console.error(error);
             })
-    }, [page, limit])
+    }, [page, limit, limitParams])
 
     const renderEntries = (pageEntries: FilteredEntry[]) => {
         return pageEntries.map((entry) =>(
@@ -51,7 +51,7 @@ export const Feed = () => {
         ));
     }
 
-    const handleEntryClick = useCallback((entryId: string) => navigate(`/entry/${entryId}`), []);
+    const handleEntryClick = useCallback((entryId: string) => navigate(`/entry/${entryId}`), [navigate]);
 
     const enableButtons = () => {
         const buttons = document.querySelectorAll('.feed-navigation-button, .feed-pagination-button');

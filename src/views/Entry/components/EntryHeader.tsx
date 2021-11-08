@@ -10,7 +10,7 @@ export const EntryHeader = (props: EntryHeaderProps) => {
     const navigate = useNavigate();
     const { entryTitle } = props;
 
-    const handleCloseClick = useCallback(() => navigate(`/`), []);
+    const handleCloseClick = useCallback(() => navigate(`/`), [navigate]);
 
     return (
         <EntryStyledHeaderWrapper>

@@ -4,8 +4,6 @@ export const FeedStyledPageWrapper = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 20px 40px 20px;
-  border: 1px solid black;
-  width: 80%;
+  padding: 20px;
   margin: auto;
 `;

@@ -28,7 +28,7 @@ export const Entry = () => {
             .catch((error) => {
                 console.error(error);
             })
-    }, [])
+    }, [params])
 
     return (
         isFetched ?

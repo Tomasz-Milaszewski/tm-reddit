@@ -31,7 +31,7 @@ export const FeedHeader = (props: FeedHeaderProps) => {
 
     return (
         <FeedStyledHeaderWrapper>
-            <span>Have a nice browsing ;-)</span>
+            <span className="feed-header-title">Have a nice browsing ;-)</span>
             <FeedStyledHeaderPagination>
                 <span>Show per page: </span>
                 <div>

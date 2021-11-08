@@ -9,6 +9,15 @@ export const EntryStyledHeaderWrapper = styled.div`
   border: 1px solid orange;
   
   .entry-header-close {
-      cursor: pointer;
+    padding: 10px;
+    border: 1px solid #37BEB0;
+    background-color: #DBF5F0;
+    border-radius: 5px;
+    font-size: 14px;
+    
+    :hover {
+        cursor: pointer;
+        background-color: #A4E5E0;
+    }
   }
 `;
