@@ -21,6 +21,7 @@ export const FeedHeader = (props: FeedHeaderProps) => {
                     value={PaginationOption[option]}
                     onClick={handleClick}
                     key={option}
+                    className={"feed-pagination-button"}
                 >
                     {PaginationOption[option]}
                 </button>
@@ -32,7 +33,7 @@ export const FeedHeader = (props: FeedHeaderProps) => {
         <FeedStyledHeaderWrapper>
             <span>Have a nice browsing ;-)</span>
             <FeedStyledHeaderPagination>
-                <span>Show: </span>
+                <span>Show per page: </span>
                 <div>
                     {renderButtons(Object.keys(PaginationOption))}
                 </div>

@@ -1,5 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import { useParams } from 'react-router-dom';
+import { StyledLoader } from '../styled/StyledLoader';
 import { EntryHeader } from './components/EntryHeader';
 import { EntryStyledWrapper } from './styled/EntryStyledWrapper';
 import { EntryStyledItem } from './styled/EntryStyledItem';
@@ -23,11 +24,14 @@ export const Entry = () => {
                     setIsFetched(true);
                     setEntry(filteredEntry);
                 }
-                // (error) => {handle error}
             )
+            .catch((error) => {
+                console.error(error);
+            })
     }, [])
 
     return (
+        isFetched ?
         <EntryStyledWrapper>
             <EntryHeader entryTitle={entry.title} />
             <EntryStyledItem>
@@ -39,5 +43,6 @@ export const Entry = () => {
                 <img src={entry.thumbnail} alt=""/>
             </EntryStyledItem>
         </EntryStyledWrapper>
+        : <StyledLoader/>
     );
 };

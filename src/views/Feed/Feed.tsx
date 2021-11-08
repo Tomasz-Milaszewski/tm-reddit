@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { StyledLoader } from '../styled/StyledLoader';
 import { FeedNavigation } from './components/FeedNavigation';
 import { FeedHeader } from './components/FeedHeader';
 import { FeedStyledPageWrapper } from './styled/FeedStyledPageWrapper';
@@ -31,8 +32,10 @@ export const Feed = () => {
                     setEntries(filteredEntries);
                     setBorderEntries(getBorderEntries(filteredEntries))
                 }
-                // (error) => {handle error}
             )
+            .catch((error) => {
+                console.error(error);
+            })
     }, [page, limit])
 
     const renderEntries = (pageEntries: FilteredEntry[]) => {
@@ -51,27 +54,31 @@ export const Feed = () => {
     const handleEntryClick = useCallback((entryId: string) => navigate(`/entry/${entryId}`), []);
 
     const enableButtons = () => {
-        const buttons = document.querySelectorAll('button');
-        buttons.forEach((button) => button.disabled = false);
+        const buttons = document.querySelectorAll('.feed-navigation-button, .feed-pagination-button');
+        buttons.forEach((button) => (button as HTMLButtonElement).disabled = false);
     }
 
     const disableButtons = () => {
-        const buttons = document.querySelectorAll('button');
-        buttons.forEach((button) => button.disabled = true);
+        const buttons = document.querySelectorAll('.feed-navigation-button, .feed-pagination-button');
+        buttons.forEach((button) => (button as HTMLButtonElement).disabled = true);
     }
 
     return (
+        isFetched ?
         <FeedStyledPageWrapper>
-            <FeedHeader setLimit={setLimit} />
-            <FeedStyledEntriesWrapper>
-                {renderEntries(entries)}
-            </FeedStyledEntriesWrapper>
-            <FeedNavigation
-                page={page}
-                setPage={setPage}
-                borderEntries={borderEntries}
-                setLimitParams={setLimitParams}
-            />
+            <React.Fragment>
+                <FeedHeader setLimit={setLimit} />
+                <FeedStyledEntriesWrapper>
+                    {renderEntries(entries)}
+                </FeedStyledEntriesWrapper>
+                <FeedNavigation
+                    page={page}
+                    setPage={setPage}
+                    borderEntries={borderEntries}
+                    setLimitParams={setLimitParams}
+                />
+            </React.Fragment>
         </FeedStyledPageWrapper>
+        : <StyledLoader/>
     );
 };

@@ -32,8 +32,8 @@ export const FeedNavigation = (props: FeedNavigationProps) => {
 
     return (
         <FeedStyledNavigationWrapper>
-            <button onClick={handlePrevClick}>previous</button>
-            <button onClick={handleNextClick}>next</button>
+            <button className="feed-navigation-button" onClick={handlePrevClick}>previous</button>
+            <button className="feed-navigation-button" onClick={handleNextClick}>next</button>
         </FeedStyledNavigationWrapper>
     );
 };
