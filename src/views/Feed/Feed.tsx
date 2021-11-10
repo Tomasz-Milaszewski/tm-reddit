@@ -1,8 +1,8 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { StyledLoader } from '../styled/StyledLoader';
 import { FeedNavigation } from './components/FeedNavigation';
 import { FeedHeader } from './components/FeedHeader';
+import { StyledLoader } from '../styled/StyledLoader';
 import { FeedStyledPageWrapper } from './styled/FeedStyledPageWrapper';
 import { FeedStyledEntriesWrapper } from './styled/FeedStyledEntriesWrapper';
 import { FeedStyledEntry } from './styled/FeedStyledEntry';
@@ -62,7 +62,6 @@ export const Feed = () => {
     const handleEntryClick = useCallback((entryId: string) => {
         navigate(`/entry/${entryId}`);
     }, [navigate]);
-
 
     const enableButtons = () => {
         const buttons = document.querySelectorAll('.feed-navigation-button, .feed-pagination-button');

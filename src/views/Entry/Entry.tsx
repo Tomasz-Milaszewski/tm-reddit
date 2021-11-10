@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import { useParams } from 'react-router-dom';
-import { StyledLoader } from '../styled/StyledLoader';
 import { EntryHeader } from './components/EntryHeader';
+import { StyledLoader } from '../styled/StyledLoader';
 import { EntryStyledWrapper } from './styled/EntryStyledWrapper';
 import { EntryStyledItem } from './styled/EntryStyledItem';
 import { filterEntriesData, getDateFromTimestamp } from '../utils/utils';
