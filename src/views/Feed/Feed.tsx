@@ -6,26 +6,35 @@ import { FeedHeader } from './components/FeedHeader';
 import { FeedStyledPageWrapper } from './styled/FeedStyledPageWrapper';
 import { FeedStyledEntriesWrapper } from './styled/FeedStyledEntriesWrapper';
 import { FeedStyledEntry } from './styled/FeedStyledEntry';
-import { filterEntriesData, getBorderEntries, getDateFromTimestamp } from '../utils/utils';
+import {
+    filterEntriesData,
+    getBorderEntries,
+    getDateFromTimestamp,
+} from '../utils/utils';
 import { FilteredEntry, BorderEntries, LimitParams } from '../types/types';
 import { REDDIT_POLAND_FEED_JSON_URL, TARGET_KEYS } from '../constants/constants';
 
 export const Feed = () => {
     const [isFetched, setIsFetched] = useState<boolean>(false);
     const [entries, setEntries] = useState<FilteredEntry[]>([]);
-    const [page, setPage] = useState<number>(1);
-    const [limit, setLimit] = useState<number>(10);
     const [borderEntries, setBorderEntries] = useState<BorderEntries>({firstEntryName: '', lastEntryName: ''});
-    const [limitParams, setLimitParams] = useState<LimitParams>({after: '', before: ''});
+    const [limitParams, setLimitParams] = useState<LimitParams>({limit: '10', after: '', before: ''});
     const navigate = useNavigate();
 
     useEffect(() => {
         disableButtons();
-        fetch(`${REDDIT_POLAND_FEED_JSON_URL}?limit=${limit}&after=${limitParams.after}&before=${limitParams.before}`)
+        fetch(`${REDDIT_POLAND_FEED_JSON_URL}?limit=${limitParams.limit}&after=${limitParams.after}&before=${limitParams.before}`)
             .then(res => res.json())
             .then(
                 (result) => {
                     const filteredEntries = filterEntriesData(result, TARGET_KEYS);
+                    if (filteredEntries.length === 0) {
+                        setLimitParams({
+                            ...limitParams,
+                            after: '',
+                            before: ''
+                        });
+                    }
                     setIsFetched(true);
                     enableButtons();
                     setEntries(filteredEntries);
@@ -35,7 +44,7 @@ export const Feed = () => {
             .catch((error) => {
                 console.error(error);
             })
-    }, [page, limit, limitParams])
+    }, [limitParams])
 
     const renderEntries = (pageEntries: FilteredEntry[]) => {
         return pageEntries.map((entry) =>(
@@ -50,7 +59,10 @@ export const Feed = () => {
         ));
     }
 
-    const handleEntryClick = useCallback((entryId: string) => navigate(`/entry/${entryId}`), [navigate]);
+    const handleEntryClick = useCallback((entryId: string) => {
+        navigate(`/entry/${entryId}`);
+    }, [navigate]);
+
 
     const enableButtons = () => {
         const buttons = document.querySelectorAll('.feed-navigation-button, .feed-pagination-button');
@@ -66,14 +78,13 @@ export const Feed = () => {
         isFetched ?
         <FeedStyledPageWrapper>
             <React.Fragment>
-                <FeedHeader setLimit={setLimit} />
+                <FeedHeader limitParams={limitParams} setLimitParams={setLimitParams} />
                 <FeedStyledEntriesWrapper>
                     {renderEntries(entries)}
                 </FeedStyledEntriesWrapper>
                 <FeedNavigation
-                    page={page}
-                    setPage={setPage}
                     borderEntries={borderEntries}
+                    limitParams={limitParams}
                     setLimitParams={setLimitParams}
                 />
             </React.Fragment>

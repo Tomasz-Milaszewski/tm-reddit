@@ -28,6 +28,7 @@ export type BorderEntries = {
 }
 
 export type LimitParams = {
+    limit: string;
     after: string;
     before: string;
 }

@@ -3,28 +3,24 @@ import { FeedStyledNavigationWrapper } from '../styled/FeedStyledNavigationWrapp
 import { BorderEntries, LimitParams } from '../../types/types';
 
 type FeedNavigationProps = {
-    page: number;
-    setPage: (page: number) => void;
     borderEntries: BorderEntries;
+    limitParams: LimitParams;
     setLimitParams: (limitParams: LimitParams) => void;
 }
 
 export const FeedNavigation = (props: FeedNavigationProps) => {
-    const { page, setPage, borderEntries, setLimitParams } = props;
+    const { borderEntries, limitParams, setLimitParams } = props;
 
     const handlePrevClick = () => {
-        if (page === 1) {
-            return;
-        }
-        setPage(page - 1);
         setLimitParams({
+            ...limitParams,
             after: '',
             before: borderEntries.firstEntryName,
         })
     }
     const handleNextClick = () => {
-        setPage(page + 1);
         setLimitParams({
+            ...limitParams,
             after: borderEntries.lastEntryName,
             before: '',
         })

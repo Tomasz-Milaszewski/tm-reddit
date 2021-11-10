@@ -17,5 +17,9 @@ export const FeedStyledHeaderPagination = styled.div`
         cursor: pointer;
         background-color: #A4E5E0;
     }
+    
+    &.active {
+        background-color: #37BEB0;
+    }
   }
 `;

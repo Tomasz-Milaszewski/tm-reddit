@@ -16,8 +16,8 @@ export function filterEntriesData(entriesObject: ParsedResponse, targetKeys: str
 
 export function getBorderEntries(filteredEntries: FilteredEntry[]): BorderEntries {
     return {
-        firstEntryName: filteredEntries[0].name,
-        lastEntryName: filteredEntries[filteredEntries.length - 1].name,
+        firstEntryName: filteredEntries[0]?.name,
+        lastEntryName: filteredEntries[filteredEntries.length - 1]?.name,
     }
 }
 
