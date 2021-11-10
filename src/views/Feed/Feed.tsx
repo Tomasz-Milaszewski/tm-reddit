@@ -26,7 +26,6 @@ export const Feed = () => {
             .then(
                 (result) => {
                     const filteredEntries = filterEntriesData(result, TARGET_KEYS);
-                    console.log(filterEntriesData(result, TARGET_KEYS));
                     setIsFetched(true);
                     enableButtons();
                     setEntries(filteredEntries);

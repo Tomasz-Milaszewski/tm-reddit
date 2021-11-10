@@ -20,7 +20,6 @@ export const Entry = () => {
             .then(
                 (result) => {
                     const filteredEntry = filterEntriesData(result[0], TARGET_KEYS)[0];
-                    console.log(filteredEntry);
                     setIsFetched(true);
                     setEntry(filteredEntry);
                 }
